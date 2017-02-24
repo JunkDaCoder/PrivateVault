@@ -74,7 +74,7 @@ class main extends PluginBase implements Listener {
 
 	public function loadVault(Player $player, $number) {
 		$x=$player->getX();
-		$y=$player->getY() - 3;
+		$y=$player->getY();
 		$z=$player->getZ();
 		$player->getLevel()->setBlock(new Vector3($x, $y, $z), Block::get(54));
 		$chest = new Chest($player->getLevel()->getChunk($x >> 4, $z >> 4, true), new CompoundTag(false, array(new IntTag("x", $x), new IntTag("y", $y), new IntTag("z", $z), new StringTag("id", Tile::CHEST))));
@@ -126,7 +126,7 @@ class main extends PluginBase implements Listener {
 					$cfg->save();
 				}
 				$realChest = $inventory->getHolder();
-				$event->getPlayer()->getLevel()->setBlock(new Vector3($realChest->getX(), 128, $realChest->getZ()), Block::get(Block::AIR));
+				$event->getPlayer()->getLevel()->setBlock(new Vector3($realChest->getX(), $player->getY() - 3, $realChest->getZ()), Block::get(Block::AIR));
 				$this->using[strtolower($event->getPlayer()->getName())] = null;
 			}
 		}
@@ -159,7 +159,7 @@ class main extends PluginBase implements Listener {
 			}
 			
 			$realChest = $inventory->getHolder();
-			$realChest->getLevel()->setBlock(new Vector3($realChest->getX(), 128, $realChest->getZ()), Block::get(Block::AIR));
+			$realChest->getLevel()->setBlock(new Vector3($realChest->getX(), $player->getY() - 3, $realChest->getZ()), Block::get(Block::AIR));
 		}
 	}
 
